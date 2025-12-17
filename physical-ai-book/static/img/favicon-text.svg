@@ -1,0 +1,7 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .logo-text { fill: #0ea5e9; font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; }
+  </style>
+  <rect width="32" height="32" fill="#0f172a"/>
+  <text x="16" y="20" class="logo-text" text-anchor="middle">AI</text>
+</svg>

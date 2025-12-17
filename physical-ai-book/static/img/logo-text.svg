@@ -1,0 +1,12 @@
+<svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .main-text { fill: #0ea5e9; font-family: 'Arial', sans-serif; font-weight: bold; font-size: 16px; }
+    .sub-text { fill: #e2e8f0; font-family: 'Arial', sans-serif; font-size: 10px; }
+  </style>
+  <!-- Main Title -->
+  <text x="10" y="20" class="main-text">Physical AI &</text>
+  <text x="10" y="38" class="main-text">Humanoid Robotics</text>
+
+  <!-- Subtle geometric accent -->
+  <rect x="10" y="42" width="30" height="2" fill="#0ea5e9" />
+</svg>

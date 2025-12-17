@@ -1,0 +1,75 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bgGradient)" />
+
+  <!-- Grid pattern -->
+  <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#334155" stroke-width="0.5" opacity="0.3"/>
+  </pattern>
+  <rect width="1200" height="600" fill="url(#grid)" />
+
+  <!-- Abstract robot silhouettes -->
+  <g opacity="0.1">
+    <path d="M800,400 Q850,350 900,400 T1000,400 L1000,500 L950,500 L950,420 L900,420 L900,500 L850,500 L850,420 L800,420 Z" fill="#0ea5e9"/>
+    <path d="M600,350 Q630,320 660,350 T720,350 L720,450 L700,450 L700,370 L660,370 L660,450 L640,450 L640,370 L600,370 Z" fill="#0ea5e9"/>
+    <path d="M400,420 Q430,390 460,420 T520,420 L520,520 L500,520 L500,440 L460,440 L460,520 L440,520 L440,440 L400,440 Z" fill="#0ea5e9"/>
+  </g>
+
+  <!-- Neural network connections -->
+  <g stroke="url(#neuralGradient)" stroke-width="1" opacity="0.3">
+    <line x1="300" y1="150" x2="400" y2="200" />
+    <line x1="400" y1="200" x2="500" y2="180" />
+    <line x1="500" y1="180" x2="600" y2="220" />
+    <line x1="600" y1="220" x2="700" y2="200" />
+    <line x1="700" y1="200" x2="800" y2="250" />
+    <line x1="800" y1="250" x2="900" y2="220" />
+    <line x1="900" y1="220" x2="1000" y2="280" />
+
+    <line x1="350" y1="100" x2="450" y2="150" />
+    <line x1="450" y1="150" x2="550" y2="120" />
+    <line x1="550" y1="120" x2="650" y2="170" />
+    <line x1="650" y1="170" x2="750" y2="150" />
+    <line x1="750" y1="150" x2="850" y2="200" />
+
+    <line x1="250" y1="200" x2="350" y2="250" />
+    <line x1="350" y1="250" x2="450" y2="230" />
+    <line x1="450" y1="230" x2="550" y2="270" />
+    <line x1="550" y1="270" x2="650" y2="250" />
+    <line x1="650" y1="250" x2="750" y2="300" />
+  </g>
+
+  <!-- Sensor dots -->
+  <g fill="#0ea5e9" opacity="0.4">
+    <circle cx="300" cy="150" r="4" />
+    <circle cx="400" cy="200" r="4" />
+    <circle cx="500" cy="180" r="4" />
+    <circle cx="600" cy="220" r="4" />
+    <circle cx="700" cy="200" r="4" />
+    <circle cx="800" cy="250" r="4" />
+    <circle cx="900" cy="220" r="4" />
+    <circle cx="1000" cy="280" r="4" />
+    <circle cx="350" cy="100" r="4" />
+    <circle cx="450" cy="150" r="4" />
+    <circle cx="550" cy="120" r="4" />
+    <circle cx="650" cy="170" r="4" />
+    <circle cx="750" cy="150" r="4" />
+    <circle cx="850" cy="200" r="4" />
+    <circle cx="250" cy="200" r="4" />
+    <circle cx="350" cy="250" r="4" />
+    <circle cx="450" cy="230" r="4" />
+    <circle cx="550" cy="270" r="4" />
+    <circle cx="650" cy="250" r="4" />
+    <circle cx="750" cy="300" r="4" />
+  </g>
+</svg>

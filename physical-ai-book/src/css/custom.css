@@ -1,0 +1,545 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  /* Premium Dark Theme Colors */
+  --ifm-color-primary: #0ea5e9; /* Cyan */
+  --ifm-color-primary-dark: #0284c7; /* Darker Cyan */
+  --ifm-color-primary-darker: #0369a1; /* Even Darker Cyan */
+  --ifm-color-primary-darkest: #0c4a6e; /* Darkest Cyan */
+  --ifm-color-primary-light: #38bdf8; /* Lighter Cyan */
+  --ifm-color-primary-lighter: #7dd3fc; /* Even Lighter Cyan */
+  --ifm-color-primary-lightest: #bae6fd; /* Lightest Cyan */
+
+  /* Secondary Colors */
+  --ifm-color-secondary: #8b5cf6; /* Purple */
+  --ifm-color-secondary-dark: #7c3aed;
+  --ifm-color-secondary-darker: #6d28d9;
+  --ifm-color-secondary-darkest: #5b21b6;
+  --ifm-color-secondary-light: #a78bfa;
+  --ifm-color-secondary-lighter: #c4b5fd;
+  --ifm-color-secondary-lightest: #ddd6fe;
+
+  /* Background Colors */
+  --ifm-background-color: #0f172a; /* Deep Navy */
+  --ifm-background-surface-color: #1e293b; /* Dark Surface */
+  --ifm-background-surface-color-dark: #1a273d; /* Darker Surface */
+
+  /* Text Colors */
+  --ifm-color-content: #e2e8f0; /* Soft Off-White */
+  --ifm-color-content-secondary: #94a3b8; /* Secondary Text */
+  --ifm-heading-color: #f8fafc; /* Heading Color */
+
+  /* Border Colors */
+  --ifm-color-emphasis-200: #334155; /* Light Border */
+  --ifm-color-emphasis-300: #475569; /* Medium Border */
+  --ifm-color-emphasis-400: #64748b; /* Dark Border */
+
+  /* Code Colors */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(254, 202, 202, 0.1);
+
+  /* Spacing and Typography */
+  --ifm-leading: 1.6;
+  --ifm-line-height-base: 1.6;
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* Hero Colors */
+  --ifm-hero-background-color: #0f172a;
+  --ifm-hero-text-color: #e2e8f0;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #0ea5e9;
+  --ifm-color-primary-dark: #0284c7;
+  --ifm-color-primary-darker: #0369a1;
+  --ifm-color-primary-darkest: #0c4a6e;
+  --ifm-color-primary-light: #38bdf8;
+  --ifm-color-primary-lighter: #7dd3fc;
+  --ifm-color-primary-lightest: #bae6fd;
+
+  --ifm-color-secondary: #8b5cf6;
+  --ifm-color-secondary-dark: #7c3aed;
+  --ifm-color-secondary-darker: #6d28d9;
+  --ifm-color-secondary-darkest: #5b21b6;
+  --ifm-color-secondary-light: #a78bfa;
+  --ifm-color-secondary-lighter: #c4b5fd;
+  --ifm-color-secondary-lightest: #ddd6fe;
+
+  --ifm-background-color: #0f172a;
+  --ifm-background-surface-color: #1e293b;
+  --ifm-background-surface-color-dark: #1a273d;
+
+  --ifm-color-content: #e2e8f0;
+  --ifm-color-content-secondary: #94a3b8;
+  --ifm-heading-color: #f8fafc;
+
+  --ifm-color-emphasis-200: #334155;
+  --ifm-color-emphasis-300: #475569;
+  --ifm-color-emphasis-400: #64748b;
+
+  --docusaurus-highlighted-code-line-bg: rgba(254, 202, 202, 0.15);
+}
+
+/* Premium Typography */
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.markdown h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+  border-bottom: none;
+}
+
+.markdown h2 {
+  font-size: 2rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  padding-bottom: 0.5rem;
+}
+
+.markdown h3 {
+  font-size: 1.5rem;
+}
+
+.markdown h4 {
+  font-size: 1.25rem;
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol {
+  line-height: var(--ifm-leading);
+  color: var(--ifm-color-content);
+  margin-bottom: 1rem;
+}
+
+/* Improved Code Blocks */
+.prism-code {
+  border-radius: 8px;
+  padding: 1rem 1.5rem !important;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background: var(--ifm-background-surface-color-dark) !important;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  margin: 1rem 0;
+}
+
+/* Enhanced Links */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--ifm-color-primary-light);
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: var(--ifm-color-primary);
+}
+
+/* Improved Buttons */
+.button {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.button:hover {
+  text-decoration: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.button--primary {
+  background-color: var(--ifm-color-primary);
+  color: white;
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-light);
+  color: white;
+}
+
+.button--secondary {
+  background-color: var(--ifm-color-secondary);
+  color: white;
+}
+
+.button--secondary:hover {
+  background-color: var(--ifm-color-secondary-light);
+  color: white;
+}
+
+/* Improved Layout Spacing */
+.container {
+  padding: 0 1rem;
+}
+
+.row {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.col {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Enhanced Blockquotes */
+blockquote {
+  border-left: 4px solid var(--ifm-color-primary);
+  background-color: var(--ifm-background-surface-color);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* Improved Tables */
+.markdown table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.markdown table th {
+  background-color: var(--ifm-background-surface-color-dark);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.markdown table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-content);
+}
+
+.markdown table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Improved Lists */
+.markdown ul,
+.markdown ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.markdown li {
+  margin-bottom: 0.5rem;
+  line-height: var(--ifm-leading);
+  color: var(--ifm-color-content);
+}
+
+/* Admonitions */
+.admonition {
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid;
+}
+
+.admonition-note {
+  background-color: rgba(14, 165, 233, 0.1);
+  border-color: var(--ifm-color-primary);
+}
+
+.admonition-tip {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: #10b981;
+}
+
+.admonition-caution {
+  background-color: rgba(245, 158, 11, 0.1);
+  border-color: #f59e0b;
+}
+
+.admonition-warning {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+}
+
+/* Improved Navbar */
+.navbar {
+  background-color: var(--ifm-background-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.75rem 1rem;
+}
+
+.navbar__brand {
+  color: var(--ifm-heading-color);
+}
+
+.navbar__brand:hover {
+  color: var(--ifm-color-primary);
+}
+
+.navbar__item,
+.navbar__link {
+  color: var(--ifm-color-content);
+}
+
+.navbar__item:hover,
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+/* Improved Sidebar */
+.menu {
+  background-color: var(--ifm-background-surface-color);
+  border-right: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.menu__list-item {
+  margin-bottom: 0.25rem;
+}
+
+.menu__link {
+  border-radius: 6px;
+  margin: 0.25rem 0;
+  padding: 0.5rem 1rem;
+}
+
+.menu__link--active {
+  background-color: rgba(14, 165, 233, 0.1);
+  color: var(--ifm-color-primary);
+}
+
+/* Improved Footer */
+.footer {
+  background-color: var(--ifm-background-surface-color-dark);
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  padding: 3rem 0 2rem;
+}
+
+.footer__title {
+  color: var(--ifm-heading-color);
+  margin-bottom: 1rem;
+}
+
+.footer__link-item {
+  color: var(--ifm-color-content-secondary);
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary);
+}
+
+/* Enhanced Code Inline */
+.codeInline {
+  background-color: var(--ifm-background-surface-color-dark);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.875rem;
+  color: var(--ifm-color-primary-light);
+}
+
+/* Improved Horizontal Rules */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--ifm-color-emphasis-300), transparent);
+  margin: 2rem 0;
+}
+
+/* Chapter Intro Styling - Dark Theme */
+.chapter-intro {
+  background: linear-gradient(135deg, var(--ifm-background-surface-color) 0%, var(--ifm-background-surface-color-dark) 100%);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  position: relative;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-intro::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-primary-light), var(--ifm-color-secondary));
+  border-radius: 12px 12px 0 0;
+}
+
+.chapter-intro h2 {
+  color: var(--ifm-heading-color);
+  margin-top: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.chapter-intro p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: var(--ifm-color-content);
+}
+
+.chapter-intro strong {
+  color: var(--ifm-color-primary-light);
+  font-weight: 600;
+}
+
+/* Sidebar Enhancements */
+.sidebar-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ifm-color-content-secondary);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  margin-bottom: 0.5rem;
+}
+
+/* Card Styles for Content */
+.feature-card, .learning-card {
+  transition: all 0.3s ease;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.feature-card:hover, .learning-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: var(--ifm-color-primary);
+}
+
+/* Callout Blocks */
+.admonition {
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.admonition-note {
+  border-color: var(--ifm-color-primary);
+  background-color: rgba(14, 165, 233, 0.1);
+}
+
+.admonition-tip {
+  border-color: #10b981;
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.admonition-caution {
+  border-color: #f59e0b;
+  background-color: rgba(245, 158, 11, 0.1);
+}
+
+.admonition-warning {
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Code Block Enhancements */
+.code-block {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Better Typography */
+.markdown h1, .markdown h2, .markdown h3 {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.markdown h2 {
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+  padding-bottom: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.markdown h3 {
+  color: var(--ifm-heading-color);
+  margin-top: 2rem;
+}
+
+/* List Enhancements */
+.markdown ul, .markdown ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.markdown li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+  color: var(--ifm-color-content);
+}
+
+/* Blockquote Styling */
+blockquote {
+  border-left: 4px solid var(--ifm-color-primary);
+  background-color: var(--ifm-background-surface-color);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* Table Styling */
+.markdown table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.markdown table th {
+  background-color: var(--ifm-background-surface-color-dark);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.markdown table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-content);
+}
+
+/* Better horizontal rules */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--ifm-color-emphasis-300), transparent);
+  margin: 2rem 0;
+}

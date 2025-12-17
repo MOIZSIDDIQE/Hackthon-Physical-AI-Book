@@ -1,0 +1,30 @@
+# Gitignore for AI Humanoid Robotics Book Project
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+.env/
+*.egg-info/
+.pytest_cache/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.bak
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.log

@@ -1,0 +1,67 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:0.8" />
+    </linearGradient>
+    <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#sectionGradient)" />
+
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#334155" stroke-width="0.5" opacity="0.2"/>
+  </pattern>
+  <rect width="800" height="400" fill="url(#grid)" />
+
+  <!-- Learning path visualization -->
+  <g stroke="url(#pathGradient)" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M100,200 C200,150 300,250 400,200 S600,250 700,200" />
+  </g>
+
+  <!-- Node points representing learning stages -->
+  <g fill="url(#pathGradient)" opacity="0.8">
+    <circle cx="100" cy="200" r="8" />
+    <circle cx="200" cy="175" r="8" />
+    <circle cx="300" cy="225" r="8" />
+    <circle cx="400" cy="200" r="8" />
+    <circle cx="500" cy="225" r="8" />
+    <circle cx="600" cy="175" r="8" />
+    <circle cx="700" cy="200" r="8" />
+  </g>
+
+  <!-- Sensor/processing elements -->
+  <g fill="#0ea5e9" opacity="0.4">
+    <circle cx="150" cy="150" r="5" />
+    <circle cx="250" cy="120" r="5" />
+    <circle cx="350" cy="180" r="5" />
+    <circle cx="450" cy="160" r="5" />
+    <circle cx="550" cy="240" r="5" />
+    <circle cx="650" cy="140" r="5" />
+    <circle cx="180" cy="280" r="5" />
+    <circle cx="280" cy="320" r="5" />
+    <circle cx="380" cy="290" r="5" />
+    <circle cx="480" cy="310" r="5" />
+    <circle cx="580" cy="270" r="5" />
+    <circle cx="680" cy="300" r="5" />
+  </g>
+
+  <!-- Abstract circuit lines -->
+  <g stroke="#0ea5e9" stroke-width="1" opacity="0.3">
+    <line x1="150" y1="150" x2="250" y2="120" />
+    <line x1="250" y1="120" x2="350" y2="180" />
+    <line x1="350" y1="180" x2="450" y2="160" />
+    <line x1="450" y1="160" x2="550" y2="240" />
+    <line x1="550" y1="240" x2="650" y2="140" />
+    <line x1="180" y1="280" x2="280" y2="320" />
+    <line x1="280" y1="320" x2="380" y2="290" />
+    <line x1="380" y1="290" x2="480" y2="310" />
+    <line x1="480" y1="310" x2="580" y2="270" />
+    <line x1="580" y1="270" x2="680" y2="300" />
+  </g>
+</svg>

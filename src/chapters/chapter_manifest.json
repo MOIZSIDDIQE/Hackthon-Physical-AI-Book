@@ -1,0 +1,52 @@
+[
+  {
+    "id": "01-introduction",
+    "title": "Introduction to AI Humanoid Robotics",
+    "description": "An overview of AI, robotics, and what to expect from the book."
+  },
+  {
+    "id": "02-robotics-fundamentals",
+    "title": "Robotics Fundamentals: Mechanics and Control",
+    "description": "Basic concepts of robot anatomy, kinematics, and control systems."
+  },
+  {
+    "id": "03-software-simulation",
+    "title": "Software and Simulation Environments",
+    "description": "Setting up the development environment, ROS2, and working with Gazebo/Unity simulations."
+  },
+  {
+    "id": "04-humanoid-design",
+    "title": "Humanoid Robot Design Principles",
+    "description": "Understanding the design considerations and physical components of humanoid robots."
+  },
+  {
+    "id": "05-programming-humanoid",
+    "title": "Programming Humanoid Robots: Basic Control",
+    "description": "Fundamentals of programming movements, inverse kinematics, and basic behaviors."
+  },
+  {
+    "id": "06-ai-integration",
+    "title": "AI Integration: Perception and Intelligence",
+    "description": "Integrating AI for sensing, perception (e.g., computer vision), and basic decision-making."
+  },
+  {
+    "id": "07-projects-labs",
+    "title": "Intermediate Projects and Labs",
+    "description": "Hands-on projects to apply learned concepts in simulation and with basic hardware."
+  },
+  {
+    "id": "08-real-hardware",
+    "title": "Working with Real Hardware",
+    "description": "Connecting and controlling physical components, dealing with real-world challenges."
+  },
+  {
+    "id": "09-capstone",
+    "title": "Capstone Project: Building a Simple Humanoid Behavior",
+    "description": "A comprehensive project combining AI, simulation, and hardware integration."
+  },
+  {
+    "id": "10-next-steps",
+    "title": "Next Steps and Advanced Topics",
+    "description": "Resources for further learning and exploring advanced humanoid robotics."
+  }
+]
