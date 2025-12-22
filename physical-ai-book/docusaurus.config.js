@@ -82,25 +82,42 @@ const config = {
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: false,
-        respectPrefersColorScheme: false,
+        respectPrefersColorScheme: true,
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'PHLZ3CG82D',
+        // Public API key: it is safe to commit it
+        apiKey: 'a42b2f5e5b6f5a10cfedf6f3a23c8f8b',
+        indexName: 'physical-ai-humanoid-robotics',
+        contextualSearch: true,
+        searchPagePath: 'search',
       },
       navbar: {
         title: 'Physical AI & Humanoid Robotics',
         logo: {
           alt: 'Physical AI & Humanoid Robotics',
           src: 'img/logo-text.svg',
+          srcDark: 'img/logo-text-dark.svg',
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Book',
+            label: '📚 Book',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/blog', label: '📝 Blog', position: 'left'},
+          {to: '/search', label: '🔍 Search', position: 'left'}, // Add search to navbar
+          {
+            to: '/docs/part-01-foundations/chapter-01/1.1-concepts',
+            label: 'Get Started',
+            position: 'right',
+            className: 'button button--primary',
+          },
           {
             href: 'https://github.com/your-org/physical-ai-book',
-            label: 'GitHub',
+            label: '⭐ GitHub',
             position: 'right',
           },
         ],
@@ -109,24 +126,24 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Documentation',
+            title: '📖 Documentation',
             items: [
               {
                 label: 'Introduction',
+                to: '/docs/part-01-foundations/chapter-01/1.1-concepts',
+              },
+              {
+                label: 'Curriculum Overview',
                 to: '/docs/intro',
               },
               {
-                label: 'Robotics Basics',
-                to: '/docs/fundamentals/robotics-basics',
-              },
-              {
-                label: 'ROS2 and Gazebo',
-                to: '/docs/simulation/ros2-gazebo',
+                label: 'Getting Started',
+                to: '/docs/part-01-foundations/chapter-01/1.2-practical',
               },
             ],
           },
           {
-            title: 'Resources',
+            title: '🛠️ Resources',
             items: [
               {
                 label: 'ROS2 Documentation',
@@ -137,22 +154,43 @@ const config = {
                 href: 'https://gazebosim.org/',
               },
               {
-                label: 'Docusaurus',
-                href: 'https://docusaurus.io',
+                label: 'Python Robotics',
+                href: 'https://pypi.org/project/robotics-toolkit/',
               },
             ],
           },
           {
-            title: 'More',
+            title: '🔗 Community',
             items: [
               {
                 label: 'GitHub',
                 href: 'https://github.com/your-org/physical-ai-book',
               },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/robotics',
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/roboticsbook',
+              },
+            ],
+          },
+          {
+            title: '📬 Contact',
+            items: [
+              {
+                label: 'Report an Issue',
+                href: 'https://github.com/your-org/physical-ai-book/issues',
+              },
+              {
+                label: 'Contribute',
+                href: 'https://github.com/your-org/physical-ai-book/blob/main/CONTRIBUTING.md',
+              },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Book. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Book. Built with Docusaurus. 🤖`,
       },
       prism: {
         theme: prismThemes.github,

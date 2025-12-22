@@ -543,3 +543,349 @@ hr {
   background: linear-gradient(to right, transparent, var(--ifm-color-emphasis-300), transparent);
   margin: 2rem 0;
 }
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+.menu__link:focus-visible,
+.navbar__link:focus-visible,
+.sidebar__item:focus-visible,
+.doc-sidebar-item:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Improved focus management for keyboard navigation */
+.focusable:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Ensure focus is visible on all interactive elements */
+.menu__list-item a:focus,
+.menu__list-item button:focus,
+.navbar__item:focus,
+.button:focus {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Enhanced accessibility for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip to content link for accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--ifm-color-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+  top: 6px;
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+/* Improved contrast for active states */
+.menu__link--active {
+  background-color: rgba(79, 70, 229, 0.15); /* indigo-900/15 */
+  color: var(--ifm-color-primary-lighter);
+  border-left: 3px solid var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* Enhanced sidebar accessibility */
+.menu__list-item-collapsible {
+  border-radius: var(--ifm-pre-border-radius);
+  margin-bottom: 0.25rem;
+}
+
+.menu__link {
+  border-radius: var(--ifm-pre-border-radius);
+  transition: all 0.2s ease;
+  margin: 0.125rem 0;
+}
+
+.menu__link:hover,
+.menu__link:focus {
+  background-color: rgba(79, 70, 229, 0.1); /* indigo-900/10 */
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Improved accessibility for navigation */
+.navbar__items .navbar__item,
+.navbar__items .navbar__link {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.navbar__items .navbar__item:hover,
+.navbar__items .navbar__link:hover,
+.navbar__items .navbar__item:focus,
+.navbar__items .navbar__link:focus {
+  background-color: rgba(79, 70, 229, 0.1);
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Better accessibility for buttons */
+.button {
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+  border: none;
+  box-shadow: var(--ifm-shadow-card);
+  font-size: 1rem;
+  letter-spacing: 0.25px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.button:focus {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  box-shadow: var(--ifm-shadow-primary);
+}
+
+/* Premium Main Content Area Styling */
+main {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, var(--ifm-background-color) 0%, var(--ifm-background-surface-color) 100%);
+  min-height: calc(100vh - 120px);
+  padding: 2rem 0;
+  overflow-x: hidden;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(79, 70, 229, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 50% 90%, rgba(79, 70, 229, 0.02) 0%, transparent 15%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Premium Container Styling */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Premium Card-like Container for Main Content */
+.main-wrapper {
+  background: linear-gradient(135deg, var(--ifm-background-surface-color) 0%, var(--ifm-background-surface-color-dark) 100%);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 20px;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  padding: 3rem;
+  margin: 2rem auto;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.main-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ifm-color-primary), transparent);
+  opacity: 0.3;
+}
+
+.main-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(79, 70, 229, 0.02), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Premium Article/Section Styling */
+article {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Enhanced Section Spacing */
+section {
+  margin: 4rem 0;
+  position: relative;
+}
+
+/* Premium Section Header */
+section > h2 {
+  position: relative;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--ifm-heading-color);
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+section > h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+  border-radius: 2px;
+}
+
+/* Premium Content Cards */
+.content-card {
+  background: linear-gradient(135deg, var(--ifm-background-surface-color-dark), var(--ifm-background-surface-color));
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--ifm-shadow-card);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.content-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--ifm-shadow-secondary);
+  border-color: var(--ifm-color-primary);
+}
+
+.content-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(79, 70, 229, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.content-card:hover::before {
+  opacity: 1;
+}
+
+/* Premium List Styling */
+.markdown ul, .markdown ol {
+  position: relative;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--ifm-background-surface-color), var(--ifm-background-surface-color-dark));
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  box-shadow: var(--ifm-shadow-card);
+  margin: 1.5rem 0;
+}
+
+.markdown ul::before, .markdown ol::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+  border-radius: 2px;
+}
+
+/* Premium Paragraph Styling */
+.markdown p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--ifm-color-content);
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.markdown p::selection {
+  background: rgba(79, 70, 229, 0.2);
+}
+
+/* Premium Image Styling */
+.markdown img {
+  border-radius: 12px;
+  box-shadow: var(--ifm-shadow-card);
+  margin: 1.5rem 0;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Premium Code Block Container */
+.code-block-container {
+  background: var(--ifm-background-surface-color-dark);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--ifm-shadow-card);
+  margin: 1.5rem 0;
+}
+
+.code-block-container .prism-code {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Respect reduced motion preference globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

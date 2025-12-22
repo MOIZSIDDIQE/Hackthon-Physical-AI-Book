@@ -1,9 +1,16 @@
 ---
-title: Introduction to Physical AI & Humanoid Robotics
+title: Welcome to Physical AI & Humanoid Robotics
 sidebar_position: 1
 ---
 
-# Introduction to Physical AI & Humanoid Robotics
+# Welcome to Physical AI & Humanoid Robotics
+
+## Table of Contents
+- [What You Will Learn](#what-you-will-learn)
+- [What Makes Humanoid Robotics Special](#what-makes-humanoid-robotics-special)
+- [Why Physical AI Matters](#why-physical-ai-matters)
+- [The Journey Ahead](#the-journey-ahead)
+- [Getting Started](#getting-started)
 
 Welcome to the fascinating world of Physical AI and Humanoid Robotics! This book is designed to take you on an exciting journey from complete beginner to capable robotics developer. Whether you're a student, hobbyist, or professional looking to explore the cutting-edge intersection of artificial intelligence and robotics, you're in the right place.
 

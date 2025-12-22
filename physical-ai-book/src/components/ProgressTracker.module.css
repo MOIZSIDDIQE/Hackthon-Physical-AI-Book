@@ -1,0 +1,120 @@
+.progressTracker {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--ifm-shadow-secondary);
+}
+
+.progressBarContainer {
+  margin-bottom: 1.5rem;
+}
+
+.progressBar {
+  height: 12px;
+  background: var(--ifm-background-surface-color-light);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  min-width: 0;
+}
+
+.progressText {
+  font-size: 0.875rem;
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+}
+
+.chapterList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chapterItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.chapterItem:hover {
+  background: var(--ifm-background-surface-color-light);
+}
+
+.chapterItem.completed {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.chapterItem.current {
+  background: rgba(79, 70, 229, 0.15);
+  border-color: var(--ifm-color-primary);
+}
+
+.chapterNumber {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ifm-background-surface-color-light);
+  color: var(--ifm-color-content);
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-right: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.chapterItem.completed .chapterNumber {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.chapterItem.current .chapterNumber {
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.chapterTitle {
+  flex: 1;
+  color: var(--ifm-color-content);
+  font-weight: 500;
+}
+
+.chapterItem.completed .chapterTitle {
+  color: var(--ifm-color-content-secondary);
+  text-decoration: line-through;
+}
+
+.completedLabel {
+  color: #10b981;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+/* Focus styles for keyboard navigation */
+.chapterItem:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
