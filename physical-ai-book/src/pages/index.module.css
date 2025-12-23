@@ -1,248 +1,349 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * ULTIMATE VIP HOMEPAGE STYLING
+ * Theme: Cyberpunk / High-Tech Robotics Lab
  */
 
+/* =========================================
+   1. HERO SECTION (The Main Stage)
+   ========================================= */
 .heroBanner {
-  padding: 6rem 0;
+  padding: 8rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  
+  /* Deep Space Gradient */
+  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
   color: white;
-  min-height: 80vh;
+  min-height: 90vh; /* Full Immersive Height */
   display: flex;
   align-items: center;
-  position: relative;
-}
-
-.heroBanner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 20%),
-    url('/img/hero-bg.svg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.3;
+  justify-content: center;
   z-index: 1;
 }
 
+/* Animated Cyber Grid Background */
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  transform: perspective(500px) rotateX(60deg) scale(2);
+  transform-origin: top center;
+  opacity: 0.2;
+  animation: gridMove 20s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes gridMove {
+  0% { transform: perspective(500px) rotateX(60deg) scale(2) translateY(0); }
+  100% { transform: perspective(500px) rotateX(60deg) scale(2) translateY(50px); }
+}
+
+/* Ambient Glow Orbs */
 .heroBanner::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    linear-gradient(45deg, transparent 49%, rgba(14, 165, 233, 0.1) 50%, transparent 51%),
-    linear-gradient(-45deg, transparent 49%, rgba(139, 92, 246, 0.1) 50%, transparent 51%);
-  background-size: 50px 50px;
-  opacity: 0.1;
-  z-index: 2;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 30%);
+  z-index: -1;
+  animation: pulseOrb 10s ease-in-out infinite alternate;
+}
+
+@keyframes pulseOrb {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0.8; transform: scale(1.1); }
 }
 
 .hero-content {
   position: relative;
-  z-index: 3;
-  max-width: 800px;
+  z-index: 10;
+  max-width: 900px;
   margin: 0 auto;
-  text-align: center;
+  padding: 0 20px;
 }
 
-.hero-text {
-  text-align: center;
-}
-
+/* =========================================
+   2. TYPOGRAPHY (Glowing Text)
+   ========================================= */
 .hero__title {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: 4.5rem;
+  font-weight: 900;
   margin-bottom: 1.5rem;
-  line-height: 1.2;
-  background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  
+  /* Modern Gradient Text */
+  background: linear-gradient(135deg, #ffffff 0%, #60a5fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  
+  /* Text Glow */
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  animation: floatText 5s ease-in-out infinite alternate;
 }
 
 .hero__subtitle {
   font-size: 1.5rem;
-  margin-bottom: 2.5rem;
-  opacity: 0.9;
-  color: #e2e8f0;
-  font-weight: 300;
+  margin-bottom: 3rem;
+  color: #cbd5e1;
+  font-weight: 400;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 1.6;
 }
 
+@keyframes floatText {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* =========================================
+   3. BUTTONS (Plasma Energy Style)
+   ========================================= */
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 2rem;
   flex-wrap: wrap;
 }
 
 .hero-button {
-  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
   color: white;
   border: none;
-  padding: 1.25rem 2.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-button:hover {
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.6);
   color: white;
   text-decoration: none;
 }
 
+.hero-button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: 0.5s;
+}
+
+.hero-button:hover::before {
+  left: 100%;
+}
+
 .hero-button-secondary {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
   color: #e2e8f0;
-  border: 2px solid #475569;
-  padding: 1.25rem 2.5rem;
-  font-size: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 50px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-decoration: none;
 }
 
 .hero-button-secondary:hover {
-  background: rgba(71, 85, 105, 0.2);
-  border-color: #64748b;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
   color: white;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
   text-decoration: none;
 }
 
+/* =========================================
+   4. SECTIONS (Learning Path & Build)
+   ========================================= */
+.learningPath, .whatYouWillBuild, .features {
+  padding: 6rem 0;
+  /* Dark Tech Background */
+  background-color: #0b1120;
+  background-image: radial-gradient(#1e293b 1px, transparent 1px);
+  background-size: 30px 30px;
+  position: relative;
+}
+
+/* Section Dividers (Glowing Lines) */
+.learningPath::before, .whatYouWillBuild::before, .features::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #f1f5f9;
+  font-weight: 800;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #94a3b8;
+  margin-bottom: 4rem;
+}
+
+/* =========================================
+   5. HOLOGRAPHIC CARDS
+   ========================================= */
+.learning-path-cards, .features .container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 0 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.learning-card, .feature-card {
+  /* Glass Effect */
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.learning-card:hover, .feature-card:hover {
+  transform: translateY(-10px);
+  /* Neon Border Glow */
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 
+    0 20px 40px -5px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(59, 130, 246, 0.2),
+    inset 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+/* Icon Styles */
+.card-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  font-size: 2rem;
+  transition: all 0.5s ease;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+}
+
+.learning-card:hover .card-icon, .feature-card:hover .card-icon {
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, #2563eb, #9333ea);
+  color: white;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+.learning-card h3, .feature-card h3 {
+  color: #f1f5f9;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.learning-card p, .feature-card p {
+  color: #cbd5e1;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* =========================================
+   HIGH-PERFORMANCE THEME UPGRADES
+   ========================================= */
+
+.heroBanner {
+  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
+  color: white;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__title {
+  background: linear-gradient(135deg, #ffffff 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+.hero-button {
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
+.hero-button:hover {
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.6);
+}
+
+/* =========================================
+   6. RESPONSIVE ADJUSTMENTS
+   ========================================= */
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 4rem 0;
+    padding: 6rem 0;
     min-height: auto;
   }
-
+  
   .hero__title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
-
-  .hero__subtitle {
-    font-size: 1.25rem;
-  }
-
-  .buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .hero-button, .hero-button-secondary {
-    width: 100%;
-    max-width: 300px;
+  
+  .learning-path-cards {
+    grid-template-columns: 1fr;
   }
 }
 
 @media screen and (max-width: 768px) {
   .hero__title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
-
-  .hero__subtitle {
-    font-size: 1.1rem;
+  
+  .hero-button, .hero-button-secondary {
+    width: 100%;
+    padding: 1rem;
   }
-}
-
-.learningPath, .whatYouWillBuild {
-  padding: 4rem 0;
-  background: #f8f9fa url('/img/section-bg.svg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #2c3e50;
-}
-
-.section-subtitle {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  margin-bottom: 3rem;
-}
-
-.learning-path-cards {
-  margin-top: 2rem;
-}
-
-.learning-card, .feature-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-  height: 100%;
-  text-align: center;
-  border: 1px solid #e0e0e0;
-}
-
-.learning-card:hover, .feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-}
-
-.card-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-.learning-card h3, .feature-card h3 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.learning-card p, .feature-card p {
-  color: #7f8c8d;
-  line-height: 1.6;
-}
-
-/* Homepage Features Override */
-.features {
-  padding: 4rem 0;
-  background: white url('/img/features-bg.svg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.features .container {
-  max-width: 1200px;
-  margin: 0 auto;
 }

@@ -1,120 +1,300 @@
+/* =========================================
+   VIP HOLOGRAPHIC TRACKER CONTAINER
+   ========================================= */
 .progressTracker {
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  box-shadow: var(--ifm-shadow-secondary);
+  /* Glassmorphism Background */
+  background: rgba(15, 23, 42, 0.6); /* Dark Translucent */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Glowing Border */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  
+  padding: 1.75rem;
+  margin: 2rem 0;
+  
+  /* Deep Space Shadow */
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 0, 0, 0.2);
+  
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative top sheen */
+.progressTracker::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
 }
 
 .progressBarContainer {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
 }
 
+/* =========================================
+   LIQUID PLASMA PROGRESS BAR
+   ========================================= */
 .progressBar {
-  height: 12px;
-  background: var(--ifm-background-surface-color-light);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: visible; /* Allow glow to spill out */
+  margin-bottom: 0.75rem;
   position: relative;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-secondary));
-  border-radius: 6px;
-  transition: width 0.3s ease;
-  min-width: 0;
+  border-radius: 10px;
+
+  /* Animated Gradient Stream - Only for users who don't prefer reduced motion */
+  background: linear-gradient(
+    90deg,
+    var(--ifm-color-primary),
+    #ec4899, /* Pink */
+    var(--ifm-color-primary)
+  );
+  background-size: 200% 100%;
+
+  /* Neon Glow around the bar */
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+
+  transition: width 0.6s ease; /* Use standard easing for better performance */
+  min-width: 5px;
+  position: relative;
+}
+
+/* Only apply animation to users who don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .progressFill {
+    animation: shimmer 3s linear infinite;
+  }
+}
+
+/* For users who prefer reduced motion, use a simpler effect */
+@media (prefers-reduced-motion: reduce) {
+  .progressFill {
+    background: var(--ifm-color-primary);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* The "Head" of the progress bar (Bright tip) */
+.progressFill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px white;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 .progressText {
-  font-size: 0.875rem;
-  color: var(--ifm-color-content-secondary);
-  text-align: center;
+  font-family: 'SF Mono', Consolas, monospace; /* Tech Font */
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary-light);
+  text-align: right;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
 }
 
+/* =========================================
+   CHAPTER LIST Styling
+   ========================================= */
 .chapterList {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .chapterItem {
   display: flex;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: var(--radius-md);
-  transition: background-color 0.2s ease;
+  padding: 1rem;
+  border-radius: 12px;
   border: 1px solid transparent;
   cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.chapterItem:hover {
-  background: var(--ifm-background-surface-color-light);
+/* Only apply hover effects to users who don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .chapterItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px); /* Slide effect */
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
+/* For users who prefer reduced motion, keep hover effects minimal */
+@media (prefers-reduced-motion: reduce) {
+  .chapterItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* --- Completed State --- */
 .chapterItem.completed {
-  background: rgba(16, 185, 129, 0.1);
-  border-color: rgba(16, 185, 129, 0.3);
+  opacity: 0.7;
 }
 
+.chapterItem.completed:hover {
+  opacity: 1;
+}
+
+/* --- Current (Active) State --- */
 .chapterItem.current {
-  background: rgba(79, 70, 229, 0.15);
-  border-color: var(--ifm-color-primary);
+  background: linear-gradient(
+    90deg, 
+    rgba(59, 130, 246, 0.15), 
+    transparent
+  );
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1) inset;
+  position: relative;
 }
 
+/* Active Indicator Line on Left */
+.chapterItem.current::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3px;
+  background: var(--ifm-color-primary);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px var(--ifm-color-primary);
+}
+
+/* =========================================
+   NUMBER ORBS
+   ========================================= */
 .chapterNumber {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--ifm-background-surface-color-light);
-  color: var(--ifm-color-content);
+  
+  /* Glass Orb Look */
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ifm-color-content-secondary);
+  
   border-radius: 50%;
-  font-weight: 600;
-  font-size: 0.875rem;
-  margin-right: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-right: 1rem;
   flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
+/* Completed Number (Green Check) */
 .chapterItem.completed .chapterNumber {
-  background: var(--ifm-color-primary);
-  color: white;
+  background: #10b981; /* Emerald Green */
+  color: black;
+  border-color: #10b981;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
 }
 
+/* Only apply scaling to users who don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .chapterItem.completed .chapterNumber {
+    transform: scale(0.9);
+  }
+}
+
+/* For users who prefer reduced motion, keep the glow effect but no scaling */
+@media (prefers-reduced-motion: reduce) {
+  .chapterItem.completed .chapterNumber {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); /* Stronger glow to compensate */
+  }
+}
+
+/* Current Number (Glowing Blue) */
 .chapterItem.current .chapterNumber {
   background: var(--ifm-color-primary);
   color: white;
-  transform: scale(1.1);
+  border-color: var(--ifm-color-primary-light);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
 }
 
+/* Only apply scaling to users who don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .chapterItem.current .chapterNumber {
+    transform: scale(1.1);
+  }
+}
+
+/* For users who prefer reduced motion, keep the glow effect but no scaling */
+@media (prefers-reduced-motion: reduce) {
+  .chapterItem.current .chapterNumber {
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.8); /* Stronger glow to compensate */
+  }
+}
+
+/* =========================================
+   TEXT STYLING
+   ========================================= */
 .chapterTitle {
   flex: 1;
   color: var(--ifm-color-content);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+
+.chapterItem.current .chapterTitle {
+  color: var(--ifm-color-primary-light);
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
 }
 
 .chapterItem.completed .chapterTitle {
   color: var(--ifm-color-content-secondary);
-  text-decoration: line-through;
+  text-decoration: line-through; /* Classic strikethrough */
+  text-decoration-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Completed Badge (Success Tag) */
 .completedLabel {
   color: #10b981;
-  font-size: 0.75rem;
-  font-weight: 600;
-  background: rgba(16, 185, 129, 0.1);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  margin-left: 0.75rem;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 /* Focus styles for keyboard navigation */
 .chapterItem:focus {
-  outline: 2px solid var(--ifm-color-primary);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ifm-color-primary);
 }

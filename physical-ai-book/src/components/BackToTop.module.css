@@ -1,57 +1,155 @@
+/* =========================================
+   VIP BACK TO TOP BUTTON (Cyberpunk Style)
+   ========================================= */
+
 .backToTop {
+  /* Positioning & Size */
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--ifm-color-primary);
-  color: white;
-  border: none;
-  cursor: pointer;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: 55px;
+  height: 55px;
+  z-index: 1000;
+  
+  /* Flexbox for Icon centering */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  
+  /* GLASSMORPHISM & GRADIENT BACKGROUND */
+  background: linear-gradient(
+    135deg, 
+    rgba(59, 130, 246, 0.9), /* Primary Blue */
+    rgba(236, 72, 153, 0.9)  /* Secondary Pink */
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  /* Border & Shape */
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  /* Initial State (Hidden) */
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-  box-shadow: var(--ifm-shadow-primary);
+  transform: translateY(40px) scale(0.8); /* Starts small and lower */
+  
+  /* Smooth Physics-based Transition */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* NEON SHADOW (Idle) */
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 0 rgba(59, 130, 246, 0); /* Glow placeholder */
+  
+  cursor: pointer;
 }
 
-.backToTop:hover {
-  background: var(--ifm-color-primary-light);
-  transform: translateY(-2px);
-  box-shadow: var(--ifm-shadow-secondary);
+/* =========================================
+   HOVER & ACTIVE STATES
+   ========================================= */
+
+/* Only apply hover effects to users who don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .backToTop:hover {
+    /* Lift and Scale */
+    transform: translateY(-5px) scale(1.1);
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 1),
+      rgba(236, 72, 153, 1)
+    );
+
+    /* INTENSE NEON GLOW ON HOVER */
+    box-shadow:
+      0 10px 25px -5px rgba(59, 130, 246, 0.6),
+      0 0 15px rgba(236, 72, 153, 0.5),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .backToTop:active {
+    /* Click effect */
+    transform: translateY(0) scale(0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* For users who prefer reduced motion, keep hover effects minimal */
+@media (prefers-reduced-motion: reduce) {
+  .backToTop:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 1),
+      rgba(236, 72, 153, 1)
+    );
+
+    box-shadow:
+      0 10px 25px -5px rgba(59, 130, 246, 0.6),
+      0 0 15px rgba(236, 72, 153, 0.5);
+
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .backToTop:active {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .backToTop:focus {
-  outline: 2px solid var(--ifm-color-primary-light);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.8);
 }
+
+/* =========================================
+   VISIBILITY STATE (Triggered by JS)
+   ========================================= */
 
 .backToTop.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
+
+/* =========================================
+   ICON STYLING & ANIMATION
+   ========================================= */
 
 .arrowIcon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.2s ease;
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* Text shadow for icon */
+  transition: transform 0.3s ease;
 }
 
-.backToTop:hover .arrowIcon {
-  transform: translateY(-2px);
+/* Rocket Launch Effect on Icon - Only for users who don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .backToTop:hover .arrowIcon {
+    transform: translateY(-4px);
+  }
 }
+
+/* For users who prefer reduced motion, keep hover effect minimal */
+@media (prefers-reduced-motion: reduce) {
+  .backToTop:hover .arrowIcon {
+    filter: brightness(1.2); /* Alternative effect that doesn't involve movement */
+  }
+}
+
+/* =========================================
+   RESPONSIVE (Mobile Optimization)
+   ========================================= */
 
 @media (max-width: 768px) {
   .backToTop {
-    bottom: 1rem;
-    right: 1rem;
-    width: 44px;
-    height: 44px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 48px; /* Thoda chhota mobile par taaki content block na kare */
+    height: 48px;
+    
+    /* Mobile par heavy glow kam rakha hai battery save karne ke liye */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
 }
