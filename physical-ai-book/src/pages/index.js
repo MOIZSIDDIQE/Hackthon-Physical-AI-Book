@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import HomepageHero from '@site/src/components/HomepageHero';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
@@ -27,39 +27,6 @@ const Icons = {
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
   )
 };
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    // Hero Banner Setup
-    <header className={clsx('hero', styles.heroBanner)}>
-      <div className="container">
-        <div className={styles['hero-content']}> {/* Layout Fix */}
-          <div className={styles['hero-text']}>
-            <h1 className={styles.hero__title}>
-              {siteConfig.title}
-            </h1>
-            <p className={styles.hero__subtitle}>
-              {siteConfig.tagline}
-            </p>
-            <div className={styles.buttons}>
-              <Link
-                className={styles['hero-button']}
-                to="/docs/part-01-foundations/chapter-01/1.1-concepts">
-                Start Learning
-              </Link>
-              <Link
-                className={styles['hero-button-secondary']}
-                to="/docs/intro">
-                View Curriculum
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 function LearningPath() {
   return (
@@ -175,7 +142,7 @@ export default function Home() {
     <Layout
       title={`Home`}
       description="A comprehensive guide to building intelligent humanoid robots">
-      <HomepageHeader />
+      <HomepageHero />
       <main>
         <LearningPath />
         <WhatYouWillBuild />

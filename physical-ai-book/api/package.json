@@ -1,0 +1,30 @@
+{
+  "name": "physical-ai-book-rag-api",
+  "version": "1.0.0",
+  "description": "RAG API server for Physical AI & Humanoid Robotics Book",
+  "main": "api/server.js",
+  "scripts": {
+    "start": "node api/server.js",
+    "dev": "nodemon api/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.16.2",
+    "cohere-ai": "^7.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "rag",
+    "ai",
+    "docusaurus",
+    "physical-ai",
+    "humanoid-robotics"
+  ],
+  "author": "Physical AI Book Team",
+  "license": "MIT"
+}

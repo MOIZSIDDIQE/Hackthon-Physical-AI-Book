@@ -20,10 +20,10 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-robotics-book-site.example.com',
+  url: process.env.DEPLOYMENT_URL || 'https://your-robotics-book-site.example.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: process.env.BASE_URL || '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -86,10 +86,10 @@ const config = {
       },
       algolia: {
         // The application ID provided by Algolia
-        appId: 'PHLZ3CG82D',
+        appId: process.env.ALGOLIA_APP_ID || 'PHLZ3CG82D',
         // Public API key: it is safe to commit it
-        apiKey: 'a42b2f5e5b6f5a10cfedf6f3a23c8f8b',
-        indexName: 'physical-ai-humanoid-robotics',
+        apiKey: process.env.ALGOLIA_API_KEY || 'a42b2f5e5b6f5a10cfedf6f3a23c8f8b',
+        indexName: process.env.ALGOLIA_INDEX_NAME || 'physical-ai-humanoid-robotics',
         contextualSearch: true,
         searchPagePath: 'search',
       },

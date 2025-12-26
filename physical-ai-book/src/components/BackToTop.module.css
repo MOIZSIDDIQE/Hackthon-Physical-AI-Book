@@ -1,155 +1,66 @@
-/* =========================================
-   VIP BACK TO TOP BUTTON (Cyberpunk Style)
-   ========================================= */
+/**
+ * Academic Theme Back to Top Button
+ * Professional, minimal, accessible design
+ */
 
 .backToTop {
-  /* Positioning & Size */
   position: fixed;
-  bottom: 2.5rem;
-  right: 2.5rem;
-  width: 55px;
-  height: 55px;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
   z-index: 1000;
-  
-  /* Flexbox for Icon centering */
+
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* GLASSMORPHISM & GRADIENT BACKGROUND */
-  background: linear-gradient(
-    135deg, 
-    rgba(59, 130, 246, 0.9), /* Primary Blue */
-    rgba(236, 72, 153, 0.9)  /* Secondary Pink */
-  );
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  
-  /* Border & Shape */
+
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  
-  /* Initial State (Hidden) */
+
   opacity: 0;
   visibility: hidden;
-  transform: translateY(40px) scale(0.8); /* Starts small and lower */
-  
-  /* Smooth Physics-based Transition */
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-  /* NEON SHADOW (Idle) */
-  box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.3),
-    0 0 0 rgba(59, 130, 246, 0); /* Glow placeholder */
-  
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* =========================================
-   HOVER & ACTIVE STATES
-   ========================================= */
-
-/* Only apply hover effects to users who don't prefer reduced motion */
-@media (prefers-reduced-motion: no-preference) {
-  .backToTop:hover {
-    /* Lift and Scale */
-    transform: translateY(-5px) scale(1.1);
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 1),
-      rgba(236, 72, 153, 1)
-    );
-
-    /* INTENSE NEON GLOW ON HOVER */
-    box-shadow:
-      0 10px 25px -5px rgba(59, 130, 246, 0.6),
-      0 0 15px rgba(236, 72, 153, 0.5),
-      inset 0 0 10px rgba(255, 255, 255, 0.2);
-
-    border-color: rgba(255, 255, 255, 0.6);
-  }
-
-  .backToTop:active {
-    /* Click effect */
-    transform: translateY(0) scale(0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-}
-
-/* For users who prefer reduced motion, keep hover effects minimal */
-@media (prefers-reduced-motion: reduce) {
-  .backToTop:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 1),
-      rgba(236, 72, 153, 1)
-    );
-
-    box-shadow:
-      0 10px 25px -5px rgba(59, 130, 246, 0.6),
-      0 0 15px rgba(236, 72, 153, 0.5);
-
-    border-color: rgba(255, 255, 255, 0.6);
-  }
-
-  .backToTop:active {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
+.backToTop:hover {
+  background-color: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .backToTop:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.8);
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
 }
-
-/* =========================================
-   VISIBILITY STATE (Triggered by JS)
-   ========================================= */
 
 .backToTop.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
-
-/* =========================================
-   ICON STYLING & ANIMATION
-   ========================================= */
 
 .arrowIcon {
-  width: 24px;
-  height: 24px;
-  color: #ffffff;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* Text shadow for icon */
-  transition: transform 0.3s ease;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
 }
 
-/* Rocket Launch Effect on Icon - Only for users who don't prefer reduced motion */
-@media (prefers-reduced-motion: no-preference) {
-  .backToTop:hover .arrowIcon {
-    transform: translateY(-4px);
-  }
+.backToTop:hover .arrowIcon {
+  transform: translateY(-2px);
 }
-
-/* For users who prefer reduced motion, keep hover effect minimal */
-@media (prefers-reduced-motion: reduce) {
-  .backToTop:hover .arrowIcon {
-    filter: brightness(1.2); /* Alternative effect that doesn't involve movement */
-  }
-}
-
-/* =========================================
-   RESPONSIVE (Mobile Optimization)
-   ========================================= */
 
 @media (max-width: 768px) {
   .backToTop {
     bottom: 1.5rem;
     right: 1.5rem;
-    width: 48px; /* Thoda chhota mobile par taaki content block na kare */
-    height: 48px;
-    
-    /* Mobile par heavy glow kam rakha hai battery save karne ke liye */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 40px;
+    height: 40px;
   }
 }
