@@ -78,8 +78,8 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      // Get API endpoint from environment or use default
-      const apiEndpoint = process.env.REACT_APP_CHAT_API_URL || 'http://localhost:3001/api/chat';
+      // Get API endpoint - explicitly set to the known working URL
+      const apiEndpoint = 'http://localhost:3001/api/chat';
 
       // Call the API
       const response = await fetch(apiEndpoint, {

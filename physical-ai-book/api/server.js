@@ -127,54 +127,82 @@ app.post('/api/chat', async (req, res) => {
     Answer and provide citations to the specific parts of the book where you found the information:`;
 
     // Use Gemini for text generation with retry logic
-    const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash" });
+    let generatedText = '';
+    let hasError = false;
 
-    let result;
-    let attempt = 0;
-    const maxRetries = 3;
-    let lastError;
+    try {
+      const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    while (attempt < maxRetries) {
-      try {
-        // Set up a timeout promise
-        const timeoutPromise = new Promise((_, reject) => {
-          setTimeout(() => reject(new Error('Gemini API call timeout after 30 seconds')), 30000);
-        });
+      let result;
+      let attempt = 0;
+      const maxRetries = 3;
+      let lastError;
 
-        // Race between the API call and timeout
-        result = await Promise.race([
-          model.generateContent(prompt),
-          timeoutPromise
-        ]);
-
-        const response = await result.response;
-
-        if (!response || !response.text) {
-          throw new Error('Empty response from Gemini');
-        }
-
-        const generatedText = response.text().trim();
-        break; // Success, exit retry loop
-      } catch (error) {
-        lastError = error;
-        attempt++;
-
-        if (attempt >= maxRetries) {
-          console.error('Gemini API error after retries:', error);
-          return res.status(500).json({
-            error: 'Failed to generate response from Gemini after multiple attempts',
-            response: "I'm having trouble generating a response. Please try again."
+      while (attempt < maxRetries) {
+        try {
+          // Set up a timeout promise
+          const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Gemini API call timeout after 30 seconds')), 30000);
           });
-        }
 
-        // Wait before retry with exponential backoff
-        const waitTime = Math.pow(2, attempt) * 1000; // 2^attempt * 1000ms
-        console.log(`Gemini API attempt ${attempt} failed, retrying in ${waitTime}ms...`);
-        await new Promise(resolve => setTimeout(resolve, waitTime));
+          // Race between the API call and timeout
+          result = await Promise.race([
+            model.generateContent(prompt),
+            timeoutPromise
+          ]);
+
+          const response = await result.response;
+
+          if (!response || !response.text) {
+            throw new Error('Empty response from Gemini');
+          }
+
+          generatedText = response.text().trim();
+          break; // Success, exit retry loop
+        } catch (error) {
+          lastError = error;
+          attempt++;
+
+          if (attempt >= maxRetries) {
+            console.error('Gemini API error after retries:', error);
+            hasError = true;
+            break;
+          }
+
+          // Wait before retry with exponential backoff
+          const waitTime = Math.pow(2, attempt) * 1000; // 2^attempt * 1000ms
+          console.log(`Gemini API attempt ${attempt} failed, retrying in ${waitTime}ms...`);
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+        }
       }
+    } catch (error) {
+      console.error('Gemini API initialization error:', error);
+      hasError = true;
     }
 
-    const generatedText = result.response.text().trim();
+    // If Gemini failed, try to use context directly as a fallback
+    if (hasError) {
+      console.log('Using fallback response generation');
+      // Create a more structured response based on the context and query
+      // Extract key information from the context that relates to the query
+      const queryLower = message.toLowerCase();
+      let relevantContent = context;
+
+      // Try to find content that's most relevant to the query
+      if (queryLower.includes('physical ai') || queryLower.includes('what is')) {
+        // Look for definitions or explanations in the context
+        const lines = context.split('\n');
+        const relevantLines = lines.filter(line =>
+          line.toLowerCase().includes('physical ai') ||
+          line.toLowerCase().includes('definition') ||
+          line.toLowerCase().includes('means') ||
+          line.toLowerCase().includes('represents')
+        );
+        relevantContent = relevantLines.length > 0 ? relevantLines.join('\n') : context;
+      }
+
+      generatedText = `Based on the Physical AI & Humanoid Robotics book:\n\n${relevantContent.substring(0, 800)}...\n\nFor more details about "${message}", please refer to the specific chapters in the book.`;
+    }
 
     // If the model says it's not in the book, use our standardized response
     if (generatedText.toLowerCase().includes('not covered in this book') ||

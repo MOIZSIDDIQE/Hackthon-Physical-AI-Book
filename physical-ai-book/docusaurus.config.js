@@ -77,6 +77,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Expose environment variables to client-side
+      clientModules: [
+        require.resolve('./src/client/env.js'),
+      ],
       // Replace with your project's social card
       image: 'img/robot-social-card.jpg',
       colorMode: {
@@ -96,9 +100,9 @@ const config = {
       navbar: {
         title: 'Physical AI & Humanoid Robotics',
         logo: {
-          alt: 'Physical AI & Humanoid Robotics',
-          src: 'img/logo-text.svg',
-          srcDark: 'img/logo-text-dark.svg',
+          alt: 'Physical AI & Humanoid Robotics Book',
+          src: 'img/logo.svg',
+          srcDark: 'img/logo.svg',
         },
         items: [
           {
