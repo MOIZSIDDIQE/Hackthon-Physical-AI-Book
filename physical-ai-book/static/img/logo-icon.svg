@@ -1,0 +1,31 @@
+<svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background (transparent) -->
+  <rect width="50" height="50" fill="none"/>
+
+  <!-- Humanoid robot icon with neural network -->
+  <g transform="translate(15, 10)">
+    <!-- Head with neural pattern -->
+    <circle cx="10" cy="5" r="5" fill="url(#blueGradient)"/>
+    <circle cx="8" cy="3" r="1" fill="#ffffff"/>
+    <circle cx="12" cy="3" r="1" fill="#ffffff"/>
+    <!-- Body -->
+    <rect x="7" y="10" width="6" height="10" fill="url(#blueGradient)"/>
+    <!-- Arms -->
+    <line x1="3" y1="14" x2="17" y2="14" stroke="url(#blueGradient)" stroke-width="1.5"/>
+    <!-- Legs -->
+    <line x1="9" y1="20" x2="9" y2="26" stroke="url(#blueGradient)" stroke-width="1.5"/>
+    <line x1="11" y1="20" x2="11" y2="26" stroke="url(#blueGradient)" stroke-width="1.5"/>
+
+    <!-- Neural network dots -->
+    <circle cx="14" cy="0" r="1" fill="#3b82f6"/>
+    <circle cx="16" cy="2" r="1" fill="#06b6d4"/>
+    <circle cx="13" cy="4" r="1" fill="#3b82f6"/>
+  </g>
+</svg>

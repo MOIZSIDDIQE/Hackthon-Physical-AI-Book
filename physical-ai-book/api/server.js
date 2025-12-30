@@ -79,6 +79,48 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Intent detection function
+function detectIntent(message) {
+  const trimmedMessage = message.trim().toLowerCase();
+
+  // GREETING intent: Check for greetings
+  const greetingPatterns = ['hi', 'hello', 'hey', 'yo', 'greetings', 'good morning', 'good afternoon', 'good evening'];
+  for (const pattern of greetingPatterns) {
+    if (trimmedMessage === pattern || trimmedMessage.startsWith(pattern + ' ') || trimmedMessage.endsWith(' ' + pattern)) {
+      return 'GREETING';
+    }
+  }
+
+  // META intent: Check for meta questions about the site or chatbot
+  const metaPatterns = ['what can you do', 'how does this work', 'what is this', 'who are you', 'help', 'what is this site', 'what is this chatbot', 'what is this about'];
+  for (const pattern of metaPatterns) {
+    if (trimmedMessage.includes(pattern)) {
+      return 'META';
+    }
+  }
+
+  // UNCLEAR intent: Less than 3 words or too short
+  if (trimmedMessage.split(/\s+/).filter(word => word.length > 0).length < 3) {
+    return 'UNCLEAR';
+  }
+
+  // BOOK-RELATED TECHNICAL QUESTION intent: Check for technical terms related to the book
+  const technicalTerms = ['physical ai', 'humanoid', 'robot', 'perception', 'motion planning', 'control', 'simulation', 'kinematics', 'dynamics', 'locomotion', 'manipulation', 'navigation', 'sensors', 'actuators', 'ai', 'machine learning', 'neural networks', 'computer vision', 'robotics'];
+  for (const term of technicalTerms) {
+    if (trimmedMessage.includes(term)) {
+      return 'BOOK_TECHNICAL';
+    }
+  }
+
+  // If no clear technical terms but seems like a question, classify as unclear
+  if (trimmedMessage.includes('?') || trimmedMessage.includes('what') || trimmedMessage.includes('how') || trimmedMessage.includes('why') || trimmedMessage.includes('when') || trimmedMessage.includes('where') || trimmedMessage.includes('who')) {
+    return 'BOOK_TECHNICAL'; // Assume it's related to the book if it's a question
+  }
+
+  // Default to UNCLEAR if no patterns match
+  return 'UNCLEAR';
+}
+
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
   try {
@@ -92,134 +134,176 @@ app.post('/api/chat', async (req, res) => {
 
     console.log(`Received chat request: "${message.substring(0, 50)}..."`);
 
-    // 1. Perform vector search in Qdrant
-    const searchResults = await performVectorSearch(message);
+    // 1. Detect intent before processing
+    const intent = detectIntent(message);
+    console.log(`Detected intent: ${intent}`);
 
-    if (searchResults.length === 0) {
+    // Handle non-technical intents without RAG
+    if (intent === 'GREETING') {
       return res.status(200).json({
-        response: "I couldn't find relevant information in the Physical AI & Humanoid Robotics book to answer your question. Please try rephrasing or ask about a different topic covered in the book.",
+        response: "Hello 👋\n\nYou can ask me questions about perception, motion planning, robot control, simulation, or any chapter of the Physical AI book.",
         sources: [],
         query: message
       });
     }
 
-    // 2. Prepare context from search results
-    const context = searchResults.map(result => result.payload.content).join('\n\n');
-    const sources = searchResults.map(result => ({
-      part: result.payload.part || '',
-      chapter: result.payload.chapter || '',
-      section: result.payload.section || '',
-      file_path: result.payload.file_path || '',
-      heading_title: result.payload.heading_title || '',
-      score: result.score
-    }));
+    if (intent === 'META') {
+      return res.status(200).json({
+        response: "I'm your Physical AI & Humanoid Robotics assistant. I can answer questions about the book content, including topics like perception, control systems, motion planning, simulation, and more. Ask me anything related to the Physical AI & Humanoid Robotics book!",
+        sources: [],
+        query: message
+      });
+    }
 
-    // 3. Generate response using Gemini
-    const prompt = `You are an expert assistant for the "Physical AI & Humanoid Robotics Book".
-    Answer the user's question based only on the provided context from the book.
-    If the answer is not available in the context, respond with "Not covered in this book".
+    if (intent === 'UNCLEAR') {
+      return res.status(200).json({
+        response: "I couldn't find a clear question.\n\nPlease ask something specific related to Physical AI or humanoid robotics.",
+        sources: [],
+        query: message
+      });
+    }
 
-    Context from the book:
-    ${context}
+    // Only proceed with RAG for BOOK_TECHNICAL intent
+    if (intent === 'BOOK_TECHNICAL') {
+      // 2. Perform vector search in Qdrant
+      const searchResults = await performVectorSearch(message);
 
-    User question: ${message}
+      // Apply similarity threshold (e.g., >= 0.50) - adjusted for typical cosine similarity ranges
+      const filteredResults = searchResults.filter(result => result.score >= 0.50);
 
-    Answer and provide citations to the specific parts of the book where you found the information:`;
+      if (filteredResults.length === 0) {
+        return res.status(200).json({
+          response: "This topic is not clearly covered in the book.",
+          sources: [],
+          query: message
+        });
+      }
 
-    // Use Gemini for text generation with retry logic
-    let generatedText = '';
-    let hasError = false;
+      // 3. Prepare context from search results
+      const context = filteredResults.map(result => result.payload.content).join('\n\n');
+      const sources = filteredResults.map(result => ({
+        part: result.payload.part || '',
+        chapter: result.payload.chapter || '',
+        section: result.payload.section || '',
+        file_path: result.payload.file_path || '',
+        heading_title: result.payload.heading_title || '',
+        score: result.score
+      }));
 
-    try {
-      const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash" });
+      // 4. Generate response using Gemini
+      const prompt = `You are an expert assistant for the "Physical AI & Humanoid Robotics Book".
+      Answer the user's question based only on the provided context from the book.
+      If the answer is not available in the context, respond with "Not covered in this book".
 
-      let result;
-      let attempt = 0;
-      const maxRetries = 3;
-      let lastError;
+      Context from the book:
+      ${context}
 
-      while (attempt < maxRetries) {
-        try {
-          // Set up a timeout promise
-          const timeoutPromise = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Gemini API call timeout after 30 seconds')), 30000);
-          });
+      User question: ${message}
 
-          // Race between the API call and timeout
-          result = await Promise.race([
-            model.generateContent(prompt),
-            timeoutPromise
-          ]);
+      Answer and provide citations to the specific parts of the book where you found the information:`;
 
-          const response = await result.response;
+      // Use Gemini for text generation with retry logic
+      let generatedText = '';
+      let hasError = false;
 
-          if (!response || !response.text) {
-            throw new Error('Empty response from Gemini');
+      try {
+        const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+        let result;
+        let attempt = 0;
+        const maxRetries = 3;
+        let lastError;
+
+        while (attempt < maxRetries) {
+          try {
+            // Set up a timeout promise
+            const timeoutPromise = new Promise((_, reject) => {
+              setTimeout(() => reject(new Error('Gemini API call timeout after 30 seconds')), 30000);
+            });
+
+            // Race between the API call and timeout
+            result = await Promise.race([
+              model.generateContent(prompt),
+              timeoutPromise
+            ]);
+
+            const response = await result.response;
+
+            if (!response || !response.text) {
+              throw new Error('Empty response from Gemini');
+            }
+
+            generatedText = response.text().trim();
+            break; // Success, exit retry loop
+          } catch (error) {
+            lastError = error;
+            attempt++;
+
+            if (attempt >= maxRetries) {
+              console.error('Gemini API error after retries:', error);
+              hasError = true;
+              break;
+            }
+
+            // Wait before retry with exponential backoff
+            const waitTime = Math.pow(2, attempt) * 1000; // 2^attempt * 1000ms
+            console.log(`Gemini API attempt ${attempt} failed, retrying in ${waitTime}ms...`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
           }
-
-          generatedText = response.text().trim();
-          break; // Success, exit retry loop
-        } catch (error) {
-          lastError = error;
-          attempt++;
-
-          if (attempt >= maxRetries) {
-            console.error('Gemini API error after retries:', error);
-            hasError = true;
-            break;
-          }
-
-          // Wait before retry with exponential backoff
-          const waitTime = Math.pow(2, attempt) * 1000; // 2^attempt * 1000ms
-          console.log(`Gemini API attempt ${attempt} failed, retrying in ${waitTime}ms...`);
-          await new Promise(resolve => setTimeout(resolve, waitTime));
         }
-      }
-    } catch (error) {
-      console.error('Gemini API initialization error:', error);
-      hasError = true;
-    }
-
-    // If Gemini failed, try to use context directly as a fallback
-    if (hasError) {
-      console.log('Using fallback response generation');
-      // Create a more structured response based on the context and query
-      // Extract key information from the context that relates to the query
-      const queryLower = message.toLowerCase();
-      let relevantContent = context;
-
-      // Try to find content that's most relevant to the query
-      if (queryLower.includes('physical ai') || queryLower.includes('what is')) {
-        // Look for definitions or explanations in the context
-        const lines = context.split('\n');
-        const relevantLines = lines.filter(line =>
-          line.toLowerCase().includes('physical ai') ||
-          line.toLowerCase().includes('definition') ||
-          line.toLowerCase().includes('means') ||
-          line.toLowerCase().includes('represents')
-        );
-        relevantContent = relevantLines.length > 0 ? relevantLines.join('\n') : context;
+      } catch (error) {
+        console.error('Gemini API initialization error:', error);
+        hasError = true;
       }
 
-      generatedText = `Based on the Physical AI & Humanoid Robotics book:\n\n${relevantContent.substring(0, 800)}...\n\nFor more details about "${message}", please refer to the specific chapters in the book.`;
-    }
+      // If Gemini failed, try to use context directly as a fallback
+      if (hasError) {
+        console.log('Using fallback response generation');
+        // Create a more structured response based on the context and query
+        // Extract key information from the context that relates to the query
+        const queryLower = message.toLowerCase();
+        let relevantContent = context;
 
-    // If the model says it's not in the book, use our standardized response
-    if (generatedText.toLowerCase().includes('not covered in this book') ||
-        generatedText.toLowerCase().includes('not found in the context') ||
-        generatedText.toLowerCase().includes('no relevant information')) {
+        // Try to find content that's most relevant to the query
+        if (queryLower.includes('physical ai') || queryLower.includes('what is')) {
+          // Look for definitions or explanations in the context
+          const lines = context.split('\n');
+          const relevantLines = lines.filter(line =>
+            line.toLowerCase().includes('physical ai') ||
+            line.toLowerCase().includes('definition') ||
+            line.toLowerCase().includes('means') ||
+            line.toLowerCase().includes('represents')
+          );
+          relevantContent = relevantLines.length > 0 ? relevantLines.join('\n') : context;
+        }
+
+        generatedText = `Based on the Physical AI & Humanoid Robotics book:\n\n${relevantContent.substring(0, 800)}...\n\nFor more details about "${message}", please refer to the specific chapters in the book.`;
+      }
+
+      // If the model says it's not in the book, use our standardized response
+      if (generatedText.toLowerCase().includes('not covered in this book') ||
+          generatedText.toLowerCase().includes('not found in the context') ||
+          generatedText.toLowerCase().includes('no relevant information')) {
+        return res.status(200).json({
+          response: "Not covered in this book",
+          sources: [],
+          query: message
+        });
+      }
+
+      res.status(200).json({
+        response: generatedText,
+        sources: sources,
+        query: message
+      });
+    } else {
+      // This should not happen due to the checks above, but added for safety
       return res.status(200).json({
-        response: "Not covered in this book",
+        response: "I couldn't find a clear question.\n\nPlease ask something specific related to Physical AI or humanoid robotics.",
         sources: [],
         query: message
       });
     }
-
-    res.status(200).json({
-      response: generatedText,
-      sources: sources,
-      query: message
-    });
 
   } catch (error) {
     console.error('Chat API error:', error);

@@ -1,6 +1,14 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
+import { FaBook, FaGraduationCap, FaWrench } from 'react-icons/fa';
+
+// Icons for the features
+const Icons = {
+  Book: () => <FaBook size={40} color="currentColor" />,
+  Graduation: () => <FaGraduationCap size={40} color="currentColor" />,
+  Wrench: () => <FaWrench size={40} color="currentColor" />
+};
 
 const FeatureList = [
   {
@@ -11,6 +19,7 @@ const FeatureList = [
         with hands-on practical exercises and real-world applications.
       </>
     ),
+    icon: <Icons.Book />
   },
   {
     title: 'MIT-Level Rigor',
@@ -20,6 +29,7 @@ const FeatureList = [
         dynamics, control theory, and AI integration for robotics.
       </>
     ),
+    icon: <Icons.Graduation />
   },
   {
     title: 'Industry-Ready Skills',
@@ -29,15 +39,16 @@ const FeatureList = [
         that are directly applicable in research and industry.
       </>
     ),
+    icon: <Icons.Wrench />
   },
 ];
 
-function Feature({title, description}) {
+function Feature({title, description, icon}) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center padding-horiz--md">
-        <div className={styles.featureIcon}>
-          <span className={styles.icon}>🤖</span>
+      <div className={styles['feature-card']}>
+        <div className={styles['card-icon']}>
+          {icon}
         </div>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
@@ -52,8 +63,8 @@ export default function HomepageFeatures() {
       <div className="container">
         <div className="row">
           <div className="col col--12">
-            <Heading as="h2" className="section-title">Why This Curriculum</Heading>
-            <p className="section-subtitle">World-class robotics education designed for the future</p>
+            <Heading as="h2" className={styles['section-title']}>Why This Curriculum</Heading>
+            <p className={styles['section-subtitle']}>World-class robotics education designed for the future</p>
           </div>
         </div>
         <div className="row">

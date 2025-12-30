@@ -4,71 +4,104 @@
  */
 
 .features {
-  padding: 4rem 0;
+  padding: 6rem 0;
+  /* Dark Tech Background */
+  background-color: #0b1120;
+  background-image: radial-gradient(#1e293b 1px, transparent 1px);
+  background-size: 30px 30px;
+  position: relative;
   width: 100%;
-  background-color: var(--ifm-background-surface-color);
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
 }
 
 /* Main Section Title */
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: 3rem;
   margin-bottom: 1rem;
-  color: var(--ifm-heading-color);
+  color: #f1f5f9;
+  font-weight: 800;
 }
 
 /* Subtitle */
 .section-subtitle {
   text-align: center;
   font-size: 1.25rem;
-  color: var(--ifm-color-content-secondary);
-  margin-bottom: 3rem;
-  font-weight: 400;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
+  color: #94a3b8;
+  margin-bottom: 4rem;
+}
+
+/* Feature Card Container */
+.feature-card {
+  /* Glass Effect */
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  /* Neon Border Glow */
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow:
+    0 20px 40px -5px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(59, 130, 246, 0.2),
+    inset 0 0 20px rgba(59, 130, 246, 0.1);
 }
 
 /* Feature Icon */
-.featureSvg {
-  height: 120px;
-  width: 120px;
-  margin-bottom: 1.5rem;
-  transition: transform 0.2s ease;
-  filter: grayscale(100%) opacity(0.8);
-}
-
-.featureSvg:hover {
-  transform: scale(1.05);
-  filter: grayscale(0%) opacity(1);
-}
-
-.featureIcon {
+.card-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem;
+  justify-content: center;
+  color: #60a5fa;
+  font-size: 2rem;
+  transition: all 0.5s ease;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+}
+
+.card-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, #2563eb, #9333ea);
+  color: white;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
 }
 
 /* Feature Item Headings */
 .features h3 {
-  color: var(--ifm-heading-color);
+  color: #f1f5f9;
   font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 /* Feature Item Paragraphs */
 .features p {
-  color: var(--ifm-color-content);
-  text-align: center;
+  color: #cbd5e1;
   line-height: 1.7;
-  font-size: 1.1rem;
-  padding: 0 1rem;
-  margin-bottom: 0;
+  font-size: 1rem;
 }
 
 /* Responsive */

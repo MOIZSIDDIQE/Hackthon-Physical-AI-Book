@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import './ChatBot.css';
+import { FaCommentDots, FaRobot, FaTimes, FaPaperPlane } from 'react-icons/fa';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,7 @@ const ChatBot = () => {
     {
       id: 1,
       type: 'bot',
-      content: 'Hello! I\'m your Physical AI & Humanoid Robotics assistant. Ask me anything about the book!',
+      content: 'Hello 👋 I\'m your Physical AI & Humanoid Robotics assistant. Ask me about perception, control, simulation, or any chapter of the book!',
       sources: []
     }
   ]);
@@ -154,9 +155,7 @@ const ChatBot = () => {
           onClick={toggleChat}
           aria-label="Open chat with Physical AI assistant"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.37 15.01 3.05 16.32L2 22L7.68 20.95C8.99 21.63 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM9 17L7 15L9 13L8 12L6 14L4 12L5 11L7 13L9 11L10 12L8 14L10 16L9 17ZM17 17L15 15L17 13L16 12L14 14L12 12L13 11L15 13L17 11L18 12L16 14L18 16L17 17Z" fill="currentColor"/>
-          </svg>
+          <FaCommentDots size={24} />
           <span className="chatbot-float-button__badge">AI</span>
         </button>
       )}
@@ -169,13 +168,11 @@ const ChatBot = () => {
             <div className="chatbot-header">
               <div className="chatbot-header__info">
                 <div className="chatbot-header__icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.37 15.01 3.05 16.32L2 22L7.68 20.95C8.99 21.63 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM9 17L7 15L9 13L8 12L6 14L4 12L5 11L7 13L9 11L10 12L8 14L10 16L9 17ZM17 17L15 15L17 13L16 12L14 14L12 12L13 11L15 13L17 11L18 12L16 14L18 16L17 17Z" fill="currentColor"/>
-                  </svg>
+                  <FaRobot size={24} />
                 </div>
                 <div>
                   <h3 className="chatbot-header__title">Physical AI Assistant</h3>
-                  <p className="chatbot-header__subtitle">Ask about Humanoid Robotics</p>
+                  <p className="chatbot-header__subtitle">Academic Q&A for Humanoid Robotics</p>
                 </div>
               </div>
               <button
@@ -183,9 +180,7 @@ const ChatBot = () => {
                 onClick={toggleChat}
                 aria-label="Close chat"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
-                </svg>
+                <FaTimes size={20} />
               </button>
             </div>
 
@@ -205,18 +200,18 @@ const ChatBot = () => {
                   {/* Sources for bot messages */}
                   {message.type === 'bot' && message.sources && message.sources.length > 0 && (
                     <div className="chatbot-sources">
-                      <small className="chatbot-sources__label">Sources:</small>
+                      <small className="chatbot-sources__label">📚 Source:</small>
                       <ul className="chatbot-sources__list">
                         {message.sources.slice(0, 3).map((source, idx) => (
                           <li key={idx} className="chatbot-sources__item">
-                            {source.part && <span className="source-part">{source.part}</span>}
-                            {source.chapter && <span className="source-chapter">• {source.chapter}</span>}
-                            {source.heading_title && <span className="source-section">• {source.heading_title}</span>}
+                            <span className="source-part">{source.part}</span>
+                            {source.chapter && <span className="source-chapter"> • {source.chapter}</span>}
+                            {source.heading_title && <span className="source-section"> • {source.heading_title}</span>}
                           </li>
                         ))}
                         {message.sources.length > 3 && (
                           <li className="chatbot-sources__item">
-                            ... and {message.sources.length - 3} more sources
+                            ... and {message.sources.length - 3} more
                           </li>
                         )}
                       </ul>
@@ -262,10 +257,10 @@ const ChatBot = () => {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask about Physical AI, Humanoid Robotics..."
+                placeholder="Ask about Physical AI, Humanoid Robotics, Perception, Control..."
                 disabled={isLoading}
                 className="chatbot-input"
-                aria-label="Type your question"
+                aria-label="Type your question about Physical AI & Humanoid Robotics"
               />
               <button
                 type="submit"
@@ -273,9 +268,7 @@ const ChatBot = () => {
                 className="chatbot-send-button"
                 aria-label="Send message"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/>
-                </svg>
+                <FaPaperPlane size={20} />
               </button>
             </form>
           </div>

@@ -98,11 +98,11 @@ const config = {
         searchPagePath: 'search',
       },
       navbar: {
-        title: 'Physical AI & Humanoid Robotics',
+        title: '',
         logo: {
           alt: 'Physical AI & Humanoid Robotics Book',
-          src: 'img/logo.svg',
-          srcDark: 'img/logo.svg',
+          src: 'img/logo-icon.svg',
+          srcDark: 'img/logo-icon.svg',
         },
         items: [
           {
