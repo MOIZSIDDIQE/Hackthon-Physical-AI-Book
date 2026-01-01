@@ -21,8 +21,28 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(cors());
+// CORS configuration for Vercel deployment
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+    ? [
+        'https://your-vercel-domain.vercel.app', // Replace with your actual Vercel domain
+        'https://hackthon-physical-ai-book.vercel.app', // Common Vercel domain pattern
+        'http://localhost:3000', // Local Docusaurus
+        'http://localhost:3001', // Local development
+        'http://localhost:3002',
+        'http://localhost:3030'
+      ]
+    : [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'http://localhost:3002',
+        'http://localhost:3030'
+      ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -66,6 +86,24 @@ try {
   process.exit(1);
 }
 
+// Proxy for API requests to handle cross-origin issues in Vercel deployment
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+// Proxy for chat API
+app.use('/api/chat', createProxyMiddleware({
+  target: process.env.API_TARGET_URL || 'http://localhost:3001',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/chat': '/api/chat', // Remove /api/chat prefix when forwarding
+  },
+  onProxyReq: (proxyReq, req, res) => {
+    console.log(`Proxying request: ${req.method} ${req.url}`);
+  },
+  onProxyRes: (proxyRes, req, res) => {
+    console.log(`Proxy response: ${proxyRes.statusCode} for ${req.url}`);
+  }
+}));
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -77,6 +115,14 @@ app.get('/health', (req, res) => {
       gemini: 'configured'
     }
   });
+});
+
+// Handle preflight requests for all routes
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.sendStatus(200);
 });
 
 // Intent detection function

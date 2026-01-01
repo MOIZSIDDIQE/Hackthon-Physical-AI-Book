@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["api/**"]
+      }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    }
+  ],
+  "env": {
+    "GEMINI_API_KEY": "process.env.GEMINI_API_KEY",
+    "COHERE_API_KEY": "process.env.COHERE_API_KEY",
+    "QDRANT_URL": "process.env.QDRANT_URL",
+    "QDRANT_API_KEY": "process.env.QDRANT_API_KEY"
+  }
+}
